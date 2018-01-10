@@ -3,7 +3,6 @@ import { CanActivate, Router } from '@angular/router';
 import { SettingsService } from '../services/settings.service';
 import { Observable } from 'rxjs/Rx';
 import { Route } from '@angular/router/src/config';
-import { settings } from 'cluster';
 
 @Injectable()
 export class RegisterGuard implements CanActivate{
