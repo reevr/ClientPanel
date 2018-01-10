@@ -1,0 +1,33 @@
+import { Injectable } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Observable } from 'rxjs/';
+
+@Injectable()
+export class AuthService {
+
+  constructor(public afAuth: AngularFireAuth) { }
+
+  login(email: string, password: string) {
+    return new Promise((res, reject) => {
+      this.afAuth.auth.signInWithEmailAndPassword(email, password)
+      .then(userData => res(userData), err => reject(err));
+    });
+  }
+
+  getAuth() {
+    return this.afAuth.authState.map(auth => auth);
+  }
+
+  logout() {
+    this.afAuth.auth.signOut();
+  }
+
+  register(email: string, password: string) {
+    return new Promise((res, reject) => {
+      this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+      .then(userData => res(userData))
+      .catch( err => reject(err));
+    });
+  }
+
+}
